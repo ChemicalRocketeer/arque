@@ -1,7 +1,7 @@
 const assert = require('assert')
 const queue = require('./queue')
 
-let q = queue()
+let q = new queue()
 
 assert(q.isEmpty(), 'should start empty')
 assert.strictEqual(q.size(), 0)
@@ -17,7 +17,7 @@ let out = q.deq()
 assert.strictEqual(out, 'test', 'deq should return the first enqueued item')
 assert.strictEqual(q.size(), 1, 'size should be 1 after deq')
 
-q = queue({ capacity: 2 })
+q = new queue({ capacity: 2 })
 q.enq('a')
 q.enq('b')
 q.deq()
@@ -31,7 +31,7 @@ q.enq('e')
 q.enq('f')
 assert.strictEqual(q.size(), 4, 'should be able to enq beyond capacity again')
 
-q = queue({ capacity: 2 })
+q = new queue({ capacity: 2 })
 q.enq('a')
 q.enq('b')
 out = q.deq()
@@ -45,7 +45,7 @@ assert.strictEqual(out, 'c')
 q.enq('e')
 assert.strictEqual(q.size(), 2)
 
-q = queue()
+q = new queue()
 let items = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i']
 items.forEach(it => q.enq(it))
 assert.strictEqual(q.size(), items.length)

@@ -21,57 +21,47 @@
  * that the array is always filled with integers.
  */
 
-module.exports = function arque ({ capacity=8, fillValue }={}) {
-  let arr = new Array(capacity)
-  let first = 0
-  let size = 0
+module.exports = Arque
 
-  const grow = () => {
-    // We grow when the array is at max capacity
-    const length = arr.length
-    const newLength = length * 2
-    const newArr = new Array(newLength)
-    for (let i=0; i < length; i++, first++) {
-      // using first here instead of allocating another variable...
-      // we are just going to set it to 0 later anyway
-      if (first >= length) first -= length
-      newArr[i] = arr[first]
-    }
-    if (fillValue !== undefined) {
-      fill(newArr, fillValue, length)
-    }
-    first = 0
-    arr = newArr
-  }
-
-  return {
-    enq: (item) => {
-    	const length = arr.length
-      if (size === length) grow()
-      let last = first + size
-      if (last > length) last -= length
-      arr[last] = item
-      size++
-    },
-    deq: () => {
-      if (size === 0) return undefined
-      const length = arr.length
-      const result = arr[first]
-      if (++first > length) first -= length
-      size--
-      return result
-    },
-    size: () => size,
-    isEmpty: () => size === 0,
-  }
+function Arque ({ capacity=8 }={}) {
+  this._arr = new Array(capacity)
+  this._first = 0
+  this._size = 0
 }
 
-// because native fill isn't fast enough
-function fill (arr, value, start) {
-  const length = arr.length
-  if (start === undefined) start = 0
-  for (let i = start; i < length; i++) {
-    arr[i] = value
+Arque.prototype._grow = function () {
+  // We grow when the array is at max capacity
+  const length = this._arr.length
+  const newArr = new Array(length * 2)
+  for (let i=0, ref=this._first; i < length; i++, ref++) {
+    if (ref >= length) ref -= length
+    newArr[i] = this._arr[ref]
   }
-  return arr
+  this._first = 0
+  this._arr = newArr
+}
+
+Arque.prototype.enq = function (item) {
+  if (this._size === this._arr.length) this._grow()
+  let last = this._first + this._size
+  if (last >= this._arr.length) last -= this._arr.length
+  this._arr[last] = item
+  this._size++
+}
+
+Arque.prototype.deq = function (item) {
+  if (this._size === 0) return undefined
+  const length = this._arr.length
+  const result = this._arr[this._first]
+  if (++this._first >= length) this._first -= length
+  this._size--
+  return result
+}
+
+Arque.prototype.size = function () {
+  return this._size
+}
+
+Arque.prototype.isEmpty = function () {
+  return this._size === 0
 }
