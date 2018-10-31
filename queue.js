@@ -29,18 +29,6 @@ function Arque ({ capacity=8 }={}) {
   this._size = 0
 }
 
-Arque.prototype._grow = function () {
-  // We grow when the array is at max capacity
-  const length = this._arr.length
-  const newArr = new Array(length * 2)
-  for (let i=0, ref=this._first; i < length; i++, ref++) {
-    if (ref >= length) ref -= length
-    newArr[i] = this._arr[ref]
-  }
-  this._first = 0
-  this._arr = newArr
-}
-
 Arque.prototype.enq = function (item) {
   if (this._size === this._arr.length) this._grow()
   let last = this._first + this._size
@@ -64,4 +52,16 @@ Arque.prototype.size = function () {
 
 Arque.prototype.isEmpty = function () {
   return this._size === 0
+}
+
+Arque.prototype._grow = function () {
+  // We grow when the array is at max capacity
+  const length = this._arr.length
+  const newArr = new Array(length * 2)
+  for (let i=0, ref=this._first; i < length; i++, ref++) {
+    if (ref >= length) ref -= length
+    newArr[i] = this._arr[ref]
+  }
+  this._first = 0
+  this._arr = newArr
 }
