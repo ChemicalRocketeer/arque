@@ -7,17 +7,13 @@ It is the fastest JS queue I have been able to find.
 const tasks = new Arque()
 
 tasks.isEmpty() // true
-tasks.size()    // 0
 tasks.enq('buy groceries')
 tasks.enq('do taxes')
 tasks.size()    // 2
 tasks.peek()    // 'buy groceries'
-tasks.size()    // 2
 tasks.deq()     // 'buy groceries'
 tasks.size()    // 1
-tasks.peek()    // 'do taxes'
 tasks.deq()     // 'do taxes'
-tasks.size()    // 0
 tasks.deq()     // undefined
 ```
 
