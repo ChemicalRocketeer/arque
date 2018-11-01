@@ -1,0 +1,22 @@
+{
+  "name": "arque",
+  "version": "0.0.0",
+  "description": "A crazy fast JS queue implementation",
+  "main": "queue.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChemicalRocketeer/arque.git"
+  },
+  "keywords": [
+    "queue"
+  ],
+  "author": "David Aaron Suddjian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ChemicalRocketeer/arque/issues"
+  },
+  "homepage": "https://github.com/ChemicalRocketeer/arque#readme"
+}
