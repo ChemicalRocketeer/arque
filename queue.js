@@ -54,6 +54,11 @@ Arque.prototype.isEmpty = function () {
   return this._size === 0
 }
 
+Arque.prototype.peek = function () {
+  if (this._size === 0) return undefined
+  return this._arr[this._first]
+}
+
 Arque.prototype._grow = function () {
   // We grow when the array is at max capacity
   const length = this._arr.length
