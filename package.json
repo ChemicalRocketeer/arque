@@ -4,7 +4,7 @@
   "description": "A crazy fast JS queue implementation",
   "main": "q.js",
   "scripts": {
-    "test": "node test.js"
+    "test": "./test.js"
   },
   "repository": {
     "type": "git",
