@@ -37,10 +37,11 @@ Arque.prototype.pushFront = function (item) {
   if (size === capacity) {
     // grow when the array is at max capacity
     const oldBuf = buf
+    const oldCapacity = capacity
     capacity *= 2
     buf = this._buf = new Array(capacity)
-    for (let i=0, ref=this._first; i < capacity; i++, ref++) {
-      if (ref >= capacity) ref -= capacity
+    for (let i=0, ref=this._first; i < size; i++, ref++) {
+      if (ref >= oldCapacity) ref -= oldCapacity
       buf[i] = oldBuf[ref]
     }
     this._first = 0
@@ -60,10 +61,11 @@ Arque.prototype.pushBack = function (item) {
   if (size === capacity) {
     // grow when the array is at max capacity
     const oldBuf = buf
+    const oldCapacity = capacity
     capacity *= 2
     buf = this._buf = new Array(capacity)
-    for (let i=0, ref=this._first; i < capacity; i++, ref++) {
-      if (ref >= capacity) ref -= capacity
+    for (let i=0, ref=this._first; i < size; i++, ref++) {
+      if (ref >= oldCapacity) ref -= oldCapacity
       buf[i] = oldBuf[ref]
     }
     this._first = 0
@@ -76,6 +78,7 @@ Arque.prototype.pushBack = function (item) {
 }
 
 Arque.prototype.popFront = function () {
+  console.log(this._buf)
   if (this._size === 0) return undefined
   const length = this._buf.length
   const result = this._buf[this._first]

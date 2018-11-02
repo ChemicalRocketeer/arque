@@ -92,4 +92,28 @@ items.forEach(it => {
   assert.strictEqual(q.popBack(), it)
 })
 
+q = new Queue({ initialCapacity: 5 })
+q.pushFront('c')
+q.pushBack('d')
+q.pushFront('b')
+q.pushBack('e')
+q.pushFront('a')
+q.pushBack('f')
+assert.strictEqual(q.size(), 6)
+;['a', 'b', 'c', 'd', 'e', 'f'].forEach(it => {
+  assert.strictEqual(q.popFront(), it)
+})
+
+q = new Queue({ initialCapacity: 5 })
+q.pushBack('d')
+q.pushFront('c')
+q.pushBack('e')
+q.pushFront('b')
+q.pushBack('f')
+q.pushFront('a')
+assert.strictEqual(q.size(), 6)
+;['a', 'b', 'c', 'd', 'e', 'f'].forEach(it => {
+  assert.strictEqual(q.popFront(), it)
+})
+
 console.log('ok')
