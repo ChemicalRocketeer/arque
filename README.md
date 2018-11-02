@@ -37,12 +37,15 @@ the amortized performance of _n_ `enq` operations is O(1).
 - Currently, the internal buffer never decreases in size, to avoid unnecessary work.
   I'd like to add auto-shrinking as the default behavior, with an option to never shrink.
 
+- An option to never grow.
+
 - An option for a minimum buffer size (after adding shrinkage)
 
-- An option for a fixed-size queue, that rejects additional `enq` operations if it is full.
+- Ability to supply initial values
 
 - Benchmarks with alternative implementations living directly in this project
+  and run on CI
 
 - Make it fantasyland compatible
 
-- toArray, toString, and toJSON
+- Sensible method aliases

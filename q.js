@@ -127,3 +127,8 @@ Arque.prototype.toArray = function () {
   }
   return arr
 }
+
+Arque.prototype.toString = function () {
+  const arr = this.toArray()
+  return arr.join(',')
+}
