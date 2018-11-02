@@ -2,7 +2,7 @@
   "name": "arque",
   "version": "0.0.0",
   "description": "A crazy fast JS queue implementation",
-  "main": "queue.js",
+  "main": "q.js",
   "scripts": {
     "test": "node test.js"
   },
@@ -11,7 +11,9 @@
     "url": "git+https://github.com/ChemicalRocketeer/arque.git"
   },
   "keywords": [
-    "queue"
+    "queue",
+    "fast",
+    "fifo"
   ],
   "author": "David Aaron Suddjian",
   "license": "ISC",

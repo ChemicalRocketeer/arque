@@ -8,15 +8,15 @@ The implementation is currently FIFO.
 ```js
 const tasks = new Arque()
 
-tasks.isEmpty() // true
-tasks.enq('buy groceries')
-tasks.enq('do taxes')
-tasks.size()    // 2
-tasks.peek()    // 'buy groceries'
-tasks.deq()     // 'buy groceries'
-tasks.size()    // 1
-tasks.deq()     // 'do taxes'
-tasks.deq()     // undefined
+tasks.isEmpty()   // true
+tasks.pushBack('buy groceries')
+tasks.pushBack('do taxes')
+tasks.size()      // 2
+tasks.front()     // 'buy groceries'
+tasks.popFront()  // 'buy groceries'
+tasks.size()      // 1
+tasks.popFront()  // 'do taxes'
+tasks.popFront()  // undefined
 ```
 
 More usage examples available in test.js

@@ -30,7 +30,7 @@ function Arque ({ initialCapacity=8 }={}) {
   this._size = 0
 }
 
-Arque.prototype.enq = function (item) {
+Arque.prototype.pushBack = function (item) {
   let buf = this._buf
   let capacity = buf.length
   const size = this._size
@@ -51,13 +51,25 @@ Arque.prototype.enq = function (item) {
   this._size++
 }
 
-Arque.prototype.deq = function (item) {
+Arque.prototype.popFront = function () {
   if (this._size === 0) return undefined
   const length = this._buf.length
   const result = this._buf[this._first]
   if (++this._first >= length) this._first -= length
   this._size--
   return result
+}
+Arque.prototype.shift = Arque.prototype.popFront
+
+Arque.prototype.front = function () {
+  if (this._size === 0) return undefined
+  return this._buf[this._first]
+}
+
+Arque.prototype.back = function () {
+  const size = this._size
+  if (size === 0) return undefined
+  return this._buf[this._first + size]
 }
 
 Arque.prototype.size = function () {
@@ -66,9 +78,4 @@ Arque.prototype.size = function () {
 
 Arque.prototype.isEmpty = function () {
   return this._size === 0
-}
-
-Arque.prototype.peek = function () {
-  if (this._size === 0) return undefined
-  return this._buf[this._first]
 }
