@@ -31,21 +31,23 @@ function Arque ({ initialCapacity=8 }={}) {
 }
 
 Arque.prototype.enq = function (item) {
-  if (this._size === this._buf.length) {
+  let buf = this._buf
+  let capacity = buf.length
+  const size = this._size
+  if (size === capacity) {
     // grow when the array is at max capacity
-    const buf = this._buf
-    const length = buf.length
-    const newArr = new Array(length * 2)
-    for (let i=0, ref=this._first; i < length; i++, ref++) {
-      if (ref >= length) ref -= length
-      newArr[i] = buf[ref]
+    const oldBuf = buf
+    capacity *= 2
+    buf = this._buf = new Array(capacity)
+    for (let i=0, ref=this._first; i < capacity; i++, ref++) {
+      if (ref >= capacity) ref -= capacity
+      buf[i] = oldBuf[ref]
     }
     this._first = 0
-    this._buf = newArr
   }
-  let last = this._first + this._size
-  if (last >= this._buf.length) last -= this._buf.length
-  this._buf[last] = item
+  let lastIndex = this._first + size
+  if (lastIndex >= capacity) lastIndex -= capacity
+  buf[lastIndex] = item
   this._size++
 }
 
