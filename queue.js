@@ -48,6 +48,7 @@ Arque.prototype.enq = function (item) {
   this._buf[last] = item
   this._size++
 }
+Arque.prototype.enqueue = Arque.prototype.enq
 
 Arque.prototype.deq = function (item) {
   if (this._size === 0) return undefined
@@ -57,6 +58,7 @@ Arque.prototype.deq = function (item) {
   this._size--
   return result
 }
+Arque.prototype.dequeue = Arque.prototype.deq
 
 Arque.prototype.size = function () {
   return this._size

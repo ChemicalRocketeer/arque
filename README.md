@@ -42,3 +42,5 @@ the amortized performance of _n_ `enq` operations is O(1).
 - An option for a fixed-size queue, that rejects additional `enq` operations if it is full.
 
 - Benchmarks with alternative implementations living directly in this project
+
+- Expand this into a deque implementation, as long as that is possible without hurting performance.
