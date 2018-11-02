@@ -9,6 +9,7 @@ assert.strictEqual(q.peekFront(), undefined)
 assert.strictEqual(q.peekBack(), undefined)
 assert.strictEqual(q.popFront(), undefined)
 assert.strictEqual(q.popBack(), undefined)
+assert.deepStrictEqual(q.toArray(), [])
 
 q.pushBack('test')
 assert(!q.isEmpty(), 'should not stay empty')
@@ -20,6 +21,7 @@ q.pushBack('second')
 assert.strictEqual(q.size(), 2, 'should have size 1 after second pushBack')
 assert.strictEqual(q.peekFront(), 'test')
 assert.strictEqual(q.peekBack(), 'second')
+assert.deepStrictEqual(q.toArray(), ['test', 'second'])
 
 assert.strictEqual(q.popFront(), 'test', 'popFront should return the first pushBackueued item')
 assert.strictEqual(q.size(), 1, 'size should be 1 after popFront')
@@ -67,6 +69,7 @@ q.pushBack('d')
 assert.strictEqual(q.popFront(), 'c')
 q.pushBack('e')
 assert.strictEqual(q.size(), 2)
+assert.deepStrictEqual(q.toArray(), ['d', 'e'])
 
 q = new Queue()
 let items = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i']
@@ -80,6 +83,7 @@ q = new Queue()
 items = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i']
 items.forEach(it => q.pushBack(it))
 assert.strictEqual(q.size(), items.length)
+assert.deepStrictEqual(q.toArray(), items)
 items.reverse().forEach(it => {
   assert.strictEqual(q.popBack(), it)
 })
@@ -116,7 +120,9 @@ q.pushFront('b')
 q.pushBack('f')
 q.pushFront('a')
 assert.strictEqual(q.size(), 6)
-;['a', 'b', 'c', 'd', 'e', 'f'].forEach(it => {
+items = ['a', 'b', 'c', 'd', 'e', 'f']
+assert.deepStrictEqual(q.toArray(), items)
+items.forEach(it => {
   assert.strictEqual(q.popFront(), it)
 })
 

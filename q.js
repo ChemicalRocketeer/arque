@@ -115,3 +115,15 @@ Arque.prototype.size = function () {
 Arque.prototype.isEmpty = function () {
   return this._size === 0
 }
+
+Arque.prototype.toArray = function () {
+  const size = this._size
+  const buf = this._buf
+  const capacity = buf.length
+  const arr = new Array(size)
+  for (let i=0, j=this._first; i < size; i++, j++) {
+    if (j >= capacity) j -= capacity
+    arr[i] = buf[j]
+  }
+  return arr
+}
