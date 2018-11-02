@@ -28,8 +28,9 @@ the internal buffer will never be re-allocated.
 When you enqueue more items than will fit in the internal buffer,
 a new buffer will be allocated that is twice as big.
 
-While an `enq` that happens to trigger buffer growth will individually be O(n),
-the amortized performance of _n_ `enq`'s is O(1).
+An `enq` that happens to trigger buffer growth will individually be O(n),
+but since the queue size doubles each time this happens,
+the amortized performance of _n_ `enq` operations is O(1).
 
 ## Planned Features
 
