@@ -78,7 +78,6 @@ Arque.prototype.pushBack = function (item) {
 }
 
 Arque.prototype.popFront = function () {
-  console.log(this._buf)
   if (this._size === 0) return undefined
   const length = this._buf.length
   const result = this._buf[this._first]

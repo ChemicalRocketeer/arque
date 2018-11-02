@@ -92,6 +92,8 @@ items.forEach(it => {
   assert.strictEqual(q.popBack(), it)
 })
 
+// varied pushFront and pushBack calls,
+// with a re-allocation on a pushBack
 q = new Queue({ initialCapacity: 5 })
 q.pushFront('c')
 q.pushBack('d')
@@ -104,6 +106,8 @@ assert.strictEqual(q.size(), 6)
   assert.strictEqual(q.popFront(), it)
 })
 
+// varied pushFront and pushBack calls,
+// with a re-allocation on a pushFront
 q = new Queue({ initialCapacity: 5 })
 q.pushBack('d')
 q.pushFront('c')
