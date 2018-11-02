@@ -5,29 +5,38 @@ let q = new Queue()
 
 assert(q.isEmpty(), 'should start empty')
 assert.strictEqual(q.size(), 0)
-assert.strictEqual(q.front(), undefined)
+assert.strictEqual(q.peekFront(), undefined)
+assert.strictEqual(q.peekBack(), undefined)
 assert.strictEqual(q.popFront(), undefined)
-assert.strictEqual(q.front(), undefined)
+assert.strictEqual(q.popBack(), undefined)
 
 q.pushBack('test')
 assert(!q.isEmpty(), 'should not stay empty')
 assert.strictEqual(q.size(), 1, 'should have size 1 after pushBack')
-assert.strictEqual(q.front(), 'test')
+assert.strictEqual(q.peekFront(), 'test')
+assert.strictEqual(q.peekBack(), 'test')
 
 q.pushBack('second')
 assert.strictEqual(q.size(), 2, 'should have size 1 after second pushBack')
-assert.strictEqual(q.front(), 'test')
+assert.strictEqual(q.peekFront(), 'test')
+assert.strictEqual(q.peekBack(), 'second')
 
 assert.strictEqual(q.popFront(), 'test', 'popFront should return the first pushBackueued item')
 assert.strictEqual(q.size(), 1, 'size should be 1 after popFront')
-assert.strictEqual(q.front(), 'second')
+assert.strictEqual(q.peekFront(), 'second')
 
 assert.strictEqual(q.popFront(), 'second', 'popFront should return the second pushBackueued item')
 assert.strictEqual(q.size(), 0, 'size should be 0 after second popFront')
-assert.strictEqual(q.front(), undefined)
+assert.strictEqual(q.peekFront(), undefined)
 
 assert.strictEqual(q.size(), 0, 'size should be 0 after redundant popFront')
 assert.strictEqual(q.popFront(), undefined)
+
+q = new Queue({ initialCapacity: 1 })
+assert.strictEqual(q._buf.length, 1, 'should allow an initial capacity')
+q.pushBack('a')
+q.pushBack('b')
+assert.strictEqual(q._buf.length, 2)
 
 assert.throws(
   () => new Queue({ initialCapacity: 0 }),
@@ -67,10 +76,20 @@ items.forEach(it => {
   assert.strictEqual(q.popFront(), it)
 })
 
-q = new Queue({ initialCapacity: 1 })
-assert.strictEqual(q._buf.length, 1, 'should allow an initial capacity')
-q.pushBack('a')
-q.pushBack('b')
-assert.strictEqual(q._buf.length, 2)
+q = new Queue()
+items = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i']
+items.forEach(it => q.pushBack(it))
+assert.strictEqual(q.size(), items.length)
+items.reverse().forEach(it => {
+  assert.strictEqual(q.popBack(), it)
+})
+
+q = new Queue()
+items = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i']
+items.forEach(it => q.pushFront(it))
+assert.strictEqual(q.size(), items.length)
+items.forEach(it => {
+  assert.strictEqual(q.popBack(), it)
+})
 
 console.log('ok')

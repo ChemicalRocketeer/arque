@@ -12,7 +12,7 @@ tasks.isEmpty()   // true
 tasks.pushBack('buy groceries')
 tasks.pushBack('do taxes')
 tasks.size()      // 2
-tasks.front()     // 'buy groceries'
+tasks.peekFront() // 'buy groceries'
 tasks.popFront()  // 'buy groceries'
 tasks.size()      // 1
 tasks.popFront()  // 'do taxes'

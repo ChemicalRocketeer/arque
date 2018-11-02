@@ -30,6 +30,29 @@ function Arque ({ initialCapacity=8 }={}) {
   this._size = 0
 }
 
+Arque.prototype.pushFront = function (item) {
+  let buf = this._buf
+  let capacity = buf.length
+  const size = this._size
+  if (size === capacity) {
+    // grow when the array is at max capacity
+    const oldBuf = buf
+    capacity *= 2
+    buf = this._buf = new Array(capacity)
+    for (let i=0, ref=this._first; i < capacity; i++, ref++) {
+      if (ref >= capacity) ref -= capacity
+      buf[i] = oldBuf[ref]
+    }
+    this._first = 0
+  }
+
+  let insertionIndex = this._first - 1
+  if (insertionIndex < 0) insertionIndex += capacity
+  buf[insertionIndex] = item
+  this._size++
+  this._first = insertionIndex
+}
+
 Arque.prototype.pushBack = function (item) {
   let buf = this._buf
   let capacity = buf.length
@@ -45,9 +68,10 @@ Arque.prototype.pushBack = function (item) {
     }
     this._first = 0
   }
-  let lastIndex = this._first + size
-  if (lastIndex >= capacity) lastIndex -= capacity
-  buf[lastIndex] = item
+
+  let insertionIndex = this._first + size
+  if (insertionIndex >= capacity) insertionIndex -= capacity
+  buf[insertionIndex] = item
   this._size++
 }
 
@@ -59,17 +83,27 @@ Arque.prototype.popFront = function () {
   this._size--
   return result
 }
-Arque.prototype.shift = Arque.prototype.popFront
 
-Arque.prototype.front = function () {
+Arque.prototype.popBack = function () {
+  const size = this._size
+  if (size === 0) return undefined
+  const buf = this._buf
+  const capacity = buf.length
+  let index = this._first + size - 1
+  if (index >= capacity) index -= capacity
+  this._size--
+  return buf[index]
+}
+
+Arque.prototype.peekFront = function () {
   if (this._size === 0) return undefined
   return this._buf[this._first]
 }
 
-Arque.prototype.back = function () {
+Arque.prototype.peekBack = function () {
   const size = this._size
   if (size === 0) return undefined
-  return this._buf[this._first + size]
+  return this._buf[this._first + size - 1]
 }
 
 Arque.prototype.size = function () {
