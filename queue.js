@@ -23,24 +23,36 @@
 
 module.exports = Arque
 
-function Arque ({ capacity=8 }={}) {
-  this._arr = new Array(capacity)
+function Arque ({ initialCapacity=8 }={}) {
+  if (initialCapacity <= 0 ) throw new RangeError('Invalid queue capacity')
+  this._buf = new Array(initialCapacity)
   this._first = 0
   this._size = 0
 }
 
 Arque.prototype.enq = function (item) {
-  if (this._size === this._arr.length) this._grow()
+  if (this._size === this._buf.length) {
+    // grow when the array is at max capacity
+    const buf = this._buf
+    const length = buf.length
+    const newArr = new Array(length * 2)
+    for (let i=0, ref=this._first; i < length; i++, ref++) {
+      if (ref >= length) ref -= length
+      newArr[i] = buf[ref]
+    }
+    this._first = 0
+    this._buf = newArr
+  }
   let last = this._first + this._size
-  if (last >= this._arr.length) last -= this._arr.length
-  this._arr[last] = item
+  if (last >= this._buf.length) last -= this._buf.length
+  this._buf[last] = item
   this._size++
 }
 
 Arque.prototype.deq = function (item) {
   if (this._size === 0) return undefined
-  const length = this._arr.length
-  const result = this._arr[this._first]
+  const length = this._buf.length
+  const result = this._buf[this._first]
   if (++this._first >= length) this._first -= length
   this._size--
   return result
@@ -56,17 +68,5 @@ Arque.prototype.isEmpty = function () {
 
 Arque.prototype.peek = function () {
   if (this._size === 0) return undefined
-  return this._arr[this._first]
-}
-
-Arque.prototype._grow = function () {
-  // We grow when the array is at max capacity
-  const length = this._arr.length
-  const newArr = new Array(length * 2)
-  for (let i=0, ref=this._first; i < length; i++, ref++) {
-    if (ref >= length) ref -= length
-    newArr[i] = this._arr[ref]
-  }
-  this._first = 0
-  this._arr = newArr
+  return this._buf[this._first]
 }

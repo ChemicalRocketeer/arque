@@ -6,6 +6,8 @@ let q = new Queue()
 assert(q.isEmpty(), 'should start empty')
 assert.strictEqual(q.size(), 0)
 assert.strictEqual(q.peek(), undefined)
+assert.strictEqual(q.deq(), undefined)
+assert.strictEqual(q.peek(), undefined)
 
 q.enq('test')
 assert(!q.isEmpty(), 'should not stay empty')
@@ -30,7 +32,7 @@ out = q.deq()
 assert.strictEqual(q.size(), 0, 'size should be 0 after redundant deq')
 assert.strictEqual(out, undefined)
 
-q = new Queue({ capacity: 2 })
+q = new Queue({ initialCapacity: 2 })
 q.enq('a')
 q.enq('b')
 q.deq()
@@ -44,7 +46,7 @@ q.enq('e')
 q.enq('f')
 assert.strictEqual(q.size(), 4, 'should be able to enq beyond capacity again')
 
-q = new Queue({ capacity: 2 })
+q = new Queue({ initialCapacity: 2 })
 q.enq('a')
 q.enq('b')
 out = q.deq()
@@ -62,5 +64,17 @@ q = new Queue()
 let items = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i']
 items.forEach(it => q.enq(it))
 assert.strictEqual(q.size(), items.length)
+
+q = new Queue({ initialCapacity: 1 })
+assert.strictEqual(q._buf.length, 1, 'should allow an initial capacity')
+q.enq('a')
+q.enq('b')
+assert.strictEqual(q._buf.length, 2)
+
+assert.throws(
+  () => new Queue({ initialCapacity: 0 }),
+  RangeError,
+  'should not allow initialCapacity <= 0'
+)
 
 console.log('ok')
