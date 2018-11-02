@@ -1,9 +1,7 @@
 # Arque
 
-Arque is a Javascript queue implementation focused on being as fast as possible.
+Arque is a Javascript deque implementation focused on being as fast as possible.
 So far it is the fastest JS queue I have been able to find.
-
-The implementation is currently FIFO.
 
 ```js
 const tasks = new Arque()
