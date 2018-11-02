@@ -45,8 +45,6 @@ the amortized performance of _n_ `enq` operations is O(1).
 
 - Benchmarks with alternative implementations living directly in this project
 
-- Expand this into a deque implementation, as long as that is possible without hurting performance.
-
 - Make it fantasyland compatible
 
 - toArray, toString, and toJSON
