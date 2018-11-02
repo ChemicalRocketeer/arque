@@ -19,6 +19,29 @@
  * optimize the array. For example, if you have a queue of
  * integers, you might supply `{ fillValue: 0 }` to ensure
  * that the array is always filled with integers.
+ *
+ * Here is what the internal state looks like in an example
+ * sequence of enq and deq operations with capacity=3:
+ * init:   [,,]    (size=0)
+ * enq 0   [0,,]   (size=1)
+ *          ^
+ * enq 1   [0,1,]  (size=2)
+ *          ^
+ * enq 2   [0,1,2] (size=3)
+ *          ^
+ * deq     [0,1,2]  (size=2)
+ *            ^
+ * enq 3   [3,1,2] (size=3)
+ *            ^
+ * deq     [3,1,2] (size=2)
+ *              ^
+ * enq 4   [3,4,2] (size=3)
+ *              ^
+ * deq     [3,4,2] (size=2)
+ *          ^
+ * deq     [3,4,2] (size=1)
+ *            ^
+ * deq     [3,4,2] (size=0)
  */
 
 module.exports = Arque
