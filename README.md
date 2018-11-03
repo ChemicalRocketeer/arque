@@ -32,10 +32,10 @@ An `enq` that happens to trigger buffer growth will individually be O(n),
 but since the queue capacity doubles each time this happens,
 the amortized performance of _n_ `enq` operations is O(1).
 
-## Planned Features
+## Considered Modifications
 
 - Currently, the internal buffer never decreases in size, to avoid unnecessary work.
-  I'd like to add auto-shrinking as the default behavior, with an option to never shrink.
+  Possibly with auto-shrinking as the default behavior, with an option to never shrink.
 
 - An option for a minimum buffer size (after adding shrinkage)
 
@@ -43,9 +43,13 @@ the amortized performance of _n_ `enq` operations is O(1).
 
 - Ability to supply initial values
 
-- Benchmarks with alternative implementations living directly in this project
-  and run on CI
+- Benchmarks with alternative implementations
+  living directly in this project and running on CI
 
 - Make it fantasyland compatible
 
 - Sensible method aliases
+
+- Removing all options in favor of separate classes for each option
+
+- Quitting javascript entirely
