@@ -35,11 +35,11 @@ the amortized performance of _n_ `enq` operations is O(1).
 ## Considered Modifications
 
 - Currently, the internal buffer never decreases in size, to avoid unnecessary work.
-  Possibly with auto-shrinking as the default behavior, with an option to never shrink.
+  Auto-shrinking should maybe be the default behavior, with an option to never shrink.
 
 - An option for a minimum buffer size (after adding shrinkage)
 
-- An option to never grow.
+- An option to never grow -- need to decide how to handle the case of too many items.
 
 - Ability to supply initial values
 
@@ -50,6 +50,6 @@ the amortized performance of _n_ `enq` operations is O(1).
 
 - Sensible method aliases
 
-- Removing all options in favor of separate classes for each option
+- Removing all options in favor of separate classes for each option -- should simplify code and slightly speed up execution
 
 - Quitting javascript entirely
