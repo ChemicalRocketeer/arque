@@ -41,6 +41,8 @@ the amortized performance of _n_ `enq` operations is O(1).
 
 - An option to never grow -- need to decide how to handle the case of too many items.
 
+- Typescript definitions
+
 - Ability to supply initial values
 
 - Benchmarks with alternative implementations
